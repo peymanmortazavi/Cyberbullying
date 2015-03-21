@@ -46,10 +46,17 @@ app.get('/cyberbullying.json', function(req, res) {
   });
 });
 
+/*
 app.get('/form', function(req,res){
     var id = req.query.id;
     console.log('Getting form for id=' + id);
+    fs.readFile('cyberbullying.json', function(err, data){
+        var jsonData = JSON.parse(data);
+        res.send(data)
+        // console.log(data[id]);
+    })
 })
+*/
 
 app.listen(3000);
 

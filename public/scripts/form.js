@@ -22,7 +22,9 @@ var CommentForm = React.createClass({
         if(q2yes) q2Result = 'yes';
 
         // TODO: Get postId from some piece of this page
-        this.props.onCommentSubmit({'postId' : 0, 'q1' : q1Result, 'q2' : q2Result })
+        var url = document.URL;
+        var id = (url).split('=')[1];
+        this.props.onCommentSubmit({'postId' : id, 'q1' : q1Result, 'q2' : q2Result })
 
         // Clear form
         this.refs.q1no.getDOMNode().checked = false;
