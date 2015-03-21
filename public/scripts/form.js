@@ -148,7 +148,7 @@ var CommentForm = React.createClass({
 
             <br />
 
-            <input type="submit" value="Post" />
+            <input type="submit" value="Submit" />
             </form>
         );
     }
