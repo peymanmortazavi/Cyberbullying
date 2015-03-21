@@ -8,7 +8,7 @@ var NavBar = React.createClass({
         </b>
         | <a href="/">Home</a>
         | <a href="/form.html?id=0">Form</a>
-        | <a href="/about.html">About</a>
+        | <a href="/results.html">Results</a>
         </h3>
 
       </div>
