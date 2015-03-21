@@ -6,9 +6,9 @@ var Comment = React.createClass({
         return (
             <div className="comment">
                 <h2 className="commentAuthor">
-                    {this.props.id}
+                    Username: {this.props.id}
                 </h2>
-                <span dangerouslySetInnerHTML={{__html: rawMarkup}} />
+                <p>Likes: {this.props.likes}</p>
             </div>
         );
     }
@@ -20,7 +20,7 @@ var CommentList = React.createClass({
             var linkTo = "/form.html?id=" + comment.id
                 return (
                   <div className="row">
-                    <Comment id={comment.profile_owner_id} className="col-md-6">
+                    <Comment id={comment.profile_owner_id} likes={comment.likes}className="col-md-6">
                         Likes: {comment.likes}
                     </Comment>
                     <a href={linkTo}>

@@ -2,13 +2,12 @@ var converter = new Showdown.converter();
 
 var Comment = React.createClass({
     render: function() {
-        var rawMarkup = converter.makeHtml(this.props.children.toString())
         return (
             <div className="comment">
                 <h2 className="commentAuthor">
                     {this.props.id}
                 </h2>
-                <span dangerouslySetInnerHTML={{__html: rawMarkup}} />
+                <span> <p>Likes: {this.props.children[1]}</p></span>
             </div>
         );
     }
