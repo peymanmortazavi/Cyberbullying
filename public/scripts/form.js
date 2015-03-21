@@ -16,18 +16,35 @@ var Comment = React.createClass({
 
 var CommentList = React.createClass({
     render: function() {
+            var url = document.URL;
+            var id = (url).split('=')[1];
             var commentNodes = this.props.data.map(function (comment) {
-            var linkTo = "/form.html?id=" + comment.id
+            if (comment.id == id){
+                var comments = comment.comments.map(function (myComment) {
+                  return (
+                    <div class="row">
+                      <p>User: {myComment.user_id}</p>
+                      <p>{myComment.comment}</p>
+                      <p>Creation_time: {myComment.creation_time}</p>
+                      <hr/>
+                    </div>
+                  )
+                })
                 return (
                   <div className="row">
                     <Comment id={comment.profile_owner_id} className="col-md-6">
                         Likes: {comment.likes}
                     </Comment>
-                    <a href={linkTo}>
+                    <a>
                       <img src= {comment.image_url} className="col-md-2"/>
+                      {comments}
                     </a>
                   </div>
                 );
+            }
+            else {
+              return (<div/>)
+            }
             });
             return (
                 <div className="commentList">
