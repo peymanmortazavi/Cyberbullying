@@ -80,7 +80,6 @@ var CommentBox = React.createClass({
       <div className="commentBox">
         <h1>Welcome to the CyberBullying Survey</h1>
         <CommentList data={this.state.data} />
-        <CommentForm onCommentSubmit={this.handleCommentSubmit} />
       </div>
     );
   }
