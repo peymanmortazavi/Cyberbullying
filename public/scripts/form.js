@@ -36,8 +36,8 @@ var CommentList = React.createClass({
                     </Comment>
                     <a>
                       <img src= {comment.image_url} className="col-md-2"/>
-                      {comments}
                     </a>
+                      {comments}
                   </div>
                 );
             }
@@ -78,7 +78,6 @@ var DawsCommentBox = React.createClass({
     return (
       <div className="commentBox">
         <h1>Welcome to the CyberBullying Survey</h1>
-        <p> {this.state.data[0]}</p>
         <CommentList data={this.state.data} />
       </div>
     );
@@ -118,7 +117,7 @@ var CommentForm = React.createClass({
         this.refs.q1yes.getDOMNode().checked = false;
         this.refs.q2no.getDOMNode().checked = false;
         this.refs.q2yes.getDOMNode().checked = false;
-        scroll(0,0);
+        window.location.href = "/";
 
         console.log('form submitted sucessfully');
         return;
