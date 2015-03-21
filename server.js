@@ -39,13 +39,18 @@ app.post('/comments.json', function(req, res) {
   });
 });
 
-
 app.get('/cyberbullying.json', function(req, res) {
   fs.readFile('cyberbullying.json', function(err, data) {
     res.setHeader('Content-Type', 'application/json');
     res.send(data);
   });
 });
+
+app.get('/form', function(req,res){
+    var id = req.query.id;
+    console.log('Getting form for id=' + id);
+})
+
 app.listen(3000);
 
 console.log('Server started: http://localhost:3000/');
