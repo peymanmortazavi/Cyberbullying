@@ -1,23 +1,120 @@
 var CommentForm = React.createClass({
     handleSubmit: function(e) {
         e.preventDefault();
-        var author = this.refs.author.getDOMNode().value.trim();
-        var text = this.refs.text.getDOMNode().value.trim();
-        if (!text || !author) {
+
+        // Get values of radios (maybe a better way to do this....)
+        var q1no = this.refs.q1no.getDOMNode().checked;
+        var q1yes = this.refs.q1yes.getDOMNode().checked;
+        var q2no = this.refs.q2no.getDOMNode().checked;
+        var q2yes = this.refs.q2yes.getDOMNode().checked;
+
+        // Ensure both fields filled out
+        if ((!q1no && !q1yes) || (!q2no && !q2yes)){
+            console.log("form not filled out correctly");
             return;
         }
-        this.props.onCommentSubmit({author: author, text: text});
-        this.refs.author.getDOMNode().value = '';
-        this.refs.text.getDOMNode().value = '';
+
+        // Correctly set output result
+        var q1Result= 'no';
+        var q2Result = 'no';
+
+        if(q1yes) q1Result = 'yes';
+        if(q2yes) q2Result = 'yes';
+
+        // TODO: Get postId from some piece of this page
+        this.props.onCommentSubmit({'postId' : 0, 'q1' : q1Result, 'q2' : q2Result })
+
+        // Clear form
+        this.refs.q1no.getDOMNode().checked = false;
+        this.refs.q1yes.getDOMNode().checked = false;
+        this.refs.q2no.getDOMNode().checked = false;
+        this.refs.q2yes.getDOMNode().checked = false;
+        scroll(0,0);
+
+        console.log('form submitted sucessfully');
+        return;
+
+
     },
     render: function() {
         return (
             <form className="commentForm" onSubmit={this.handleSubmit}>
-            <input type="text" placeholder="Your name" ref="author" />
-            <input type="text" placeholder="Say something..." ref="text" />
+            {/*<input type="radio" placeholder="Your name" ref="author" /> */}
+            <p> Is there any cyberaggressive behavior in the online posts? Mark yes if there is at least one negative word/comment and or content with intent to harm someone or others.
+                </p>
+            <input type="radio" name="q1" value="no" ref="q1no" />
+            <label>No</label>
+            <br />
+            <input type="radio" name="q1" value="yes" ref="q1yes" />
+            <label>Yes</label>
+
+            <br />
+
+            <p> Is there any cyerbullying in the online post? Mark yes if there are negative words and or comment with intent to harm someone or other, and the posts include two or more repeated negativity against a victim that cannot easily defend him or herself
+                </p>
+            <input type="radio" name="q2" value="no" ref="q2no" />
+            <label>No</label>
+            <br />
+            <input type="radio" name="q2" value="yes" ref="q2yes" />
+            <label>Yes</label>
+
+            <br />
+
             <input type="submit" value="Post" />
             </form>
         );
     }
 });
+
+var CommentBox = React.createClass({
+    loadCommentsFromServer: function() {
+      $.ajax({
+          url: this.props.url,
+          dataType: 'json',
+          success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+    },
+    getInitialState: function() {
+        return {data: []};
+    },
+    componentDidMount: function() {
+        this.loadCommentsFromServer();
+        setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+    },
+    handleCommentSubmit: function(comment) {
+        var comments = this.state.data;
+        var newComments = comments.concat([comment]);
+        this.setState({data: newComments});
+            $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      type: 'POST',
+      data: comment,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+    },
+
+  render: function() {
+    return (
+      <div className="commentBox">
+        <CommentForm onCommentSubmit={this.handleCommentSubmit} />
+      </div>
+    );
+  }
+});
+
+React.render(
+  <CommentBox url="comments.json" pollInterval={2000} />,
+  document.getElementById('content')
+)
 
