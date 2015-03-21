@@ -1,11 +1,4 @@
-var data = [
-    {author: "Pete Hunt", text: "This is one comment"},
-    {author: "Jordan Walke", text: "This is *another* comment"},
-];
-
-
 var converter = new Showdown.converter();
-
 
 var Comment = React.createClass({
     render: function() {
@@ -13,7 +6,7 @@ var Comment = React.createClass({
         return (
             <div className="comment">
                 <h2 className="commentAuthor">
-                    {this.props.author}
+                    {this.props.id}
                 </h2>
                 <span dangerouslySetInnerHTML={{__html: rawMarkup}} />
             </div>
@@ -25,8 +18,8 @@ var CommentList = React.createClass({
     render: function() {
             var commentNodes = this.props.data.map(function (comment) {
                 return (
-                    <Comment author={comment.author}>
-                        {comment.text}
+                    <Comment id={comment.id}>
+                        {comment.likes}
                     </Comment>
                 );
             });
@@ -87,6 +80,6 @@ var CommentBox = React.createClass({
   }
 });
 React.render(
-  <CommentBox url="comments.json" pollInterval={2000} />,
+  <CommentBox url="cyberbullying.json" pollInterval={2000} />,
   document.getElementById('content')
 )
