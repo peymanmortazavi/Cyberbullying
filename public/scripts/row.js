@@ -1,11 +1,4 @@
-var data = [
-    {author: "Pete Hunt", text: "This is one comment"},
-    {author: "Jordan Walke", text: "This is *another* comment"},
-];
-
-
 var converter = new Showdown.converter();
-
 
 var Comment = React.createClass({
     render: function() {
@@ -13,7 +6,7 @@ var Comment = React.createClass({
         return (
             <div className="comment">
                 <h2 className="commentAuthor">
-                    {this.props.author}
+                    {this.props.id}
                 </h2>
                 <span dangerouslySetInnerHTML={{__html: rawMarkup}} />
             </div>
@@ -24,10 +17,16 @@ var Comment = React.createClass({
 var CommentList = React.createClass({
     render: function() {
             var commentNodes = this.props.data.map(function (comment) {
+            var linkTo = "/form?id=" + comment.id
                 return (
-                    <Comment author={comment.author}>
-                        {comment.text}
+                  <div className="row">
+                    <Comment id={comment.profile_owner_id} className="col-md-6">
+                        Likes: {comment.likes}
                     </Comment>
+                    <a href={linkTo}>
+                      <img src= {comment.image_url} className="col-md-2"/>
+                    </a>
+                  </div>
                 );
             });
             return (
@@ -79,7 +78,7 @@ var CommentBox = React.createClass({
   render: function() {
     return (
       <div className="commentBox">
-        Hello, world! I am a CommentBox.
+        <h1>Welcome to the CyberBullying Survey</h1>
         <CommentList data={this.state.data} />
         <CommentForm onCommentSubmit={this.handleCommentSubmit} />
       </div>
@@ -87,6 +86,6 @@ var CommentBox = React.createClass({
   }
 });
 React.render(
-  <CommentBox url="comments.json" pollInterval={2000} />,
+  <CommentBox url="cyberbullying.json" pollInterval={2000} />,
   document.getElementById('content')
 )
