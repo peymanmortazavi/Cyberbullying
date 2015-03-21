@@ -17,7 +17,7 @@ var Comment = React.createClass({
 var CommentList = React.createClass({
     render: function() {
             var commentNodes = this.props.data.map(function (comment) {
-            var linkTo = "/form?id=" + comment.id
+            var linkTo = "/form.html?id=" + comment.id
                 return (
                   <div className="row">
                     <Comment id={comment.profile_owner_id} className="col-md-6">
