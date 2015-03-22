@@ -1,0 +1,27 @@
+{
+  "name": "Cyberbullying",
+  "version": "1.0.0",
+  "homepage": "https://github.com/peymanmortazavi/Cyberbullying",
+  "authors": [
+    "Peyman Mortazavi <pmortazavi@cailmobility.com>"
+  ],
+  "description": "Cyberbullying",
+  "keywords": [
+    "cyber",
+    "bull"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "~0.13.1",
+    "bootstrap": "~3.3.4"
+  }
+}
