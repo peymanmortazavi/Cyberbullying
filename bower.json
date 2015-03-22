@@ -22,6 +22,8 @@
   ],
   "dependencies": {
     "react": "~0.13.1",
-    "bootstrap": "~3.3.4"
+    "bootstrap": "~3.3.4",
+    "bootswatch": "~3.3.4",
+    "showdown": "~0.4.0"
   }
 }

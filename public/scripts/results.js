@@ -4,7 +4,7 @@ var Comment = React.createClass({
     render: function() {
         var children = this.props.children;
         return (
-            <div className="comment">
+            <div className="comment container-fluid">
                 <h2 className="commentAuthor">
                     {this.props.id}
                 </h2>
@@ -19,7 +19,7 @@ var CommentList = React.createClass({
     render: function() {
             var commentNodes = this.props.data.map(function (comment) {
                 return (
-                  <div className="row">
+                  <div className="container-fluid">
                     <Comment id={"Photo Id: " + comment.postId} q1={comment.q1} q2={comment.q2} className="col-md-6">
                     </Comment>
                   </div>

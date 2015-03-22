@@ -2,14 +2,24 @@ var converter = new Showdown.converter();
 
 var Comment = React.createClass({
     render: function() {
-        var rawMarkup = converter.makeHtml(this.props.children.toString())
+       
+       var comment = this.props.data;
         return (
-            <div className="comment">
-                <h2 className="commentAuthor">
-                    Username: {this.props.id}
-                </h2>
-                <p>Likes: {this.props.likes}</p>
+           <a href={"/form.html?id=" + comment.id}>
+            <div className="container-fluid comment">
+               <div className="col-md-8">
+                  <h3>{comment.profile_owner_id }</h3>
+                  <h5>{comment.owner_caption}</h5>
+           <p>
+                  {comment.likes} 
+                  <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/2000px-Heart_coraz%C3%B3n.svg.png" style={{"width":"16px", "margin":"5px"}}/>
+           </p>
+               </div>
+               <div className="col-md-4" style={{"text-align":"right"}}>
+                  <img src={comment.image_url} className="picture" />
+               </div>
             </div>
+           </a>
         );
     }
 });
@@ -17,20 +27,10 @@ var Comment = React.createClass({
 var CommentList = React.createClass({
     render: function() {
             var commentNodes = this.props.data.map(function (comment) {
-            var linkTo = "/form.html?id=" + comment.id
-                return (
-                  <div className="row">
-                    <Comment id={comment.profile_owner_id} likes={comment.likes}className="col-md-6">
-                        Likes: {comment.likes}
-                    </Comment>
-                    <a href={linkTo}>
-                      <img src= {comment.image_url} className="col-md-2"/>
-                    </a>
-                  </div>
-                );
+                return <Comment data={comment} />;
             });
             return (
-                <div className="commentList">
+                <div>
                     {commentNodes}
                 </div>
             );

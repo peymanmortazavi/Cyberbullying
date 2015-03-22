@@ -1,29 +1,71 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hello React</title>
-    <!-- Not present in the tutorial. Just for basic styling. -->
+    
+    <title>Cyberbullying</title>
+    
     <link rel="stylesheet" href="css/base.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/react.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/JSXTransformer.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"></script>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="components/react/react.js"></script>
+    <script src="components/react/JSXTransformer.js"></script>
+    <script src="components/jquery/dist/jquery.js"></script>
+    <script src="components/showdown/compressed/Showdown.js"></script>
+    
+    <link rel="stylesheet" href="components/bootswatch/cosmo/bootstrap.css">
+    
   </head>
   <body>
+    
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand">Cyberbullying</a>
+          </div>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li><a href="/">Home </a></li>
+              <li><a href="form.html?id=0">Form </a></li>
+              <li><a href="results.html">Results </a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    
       <div class="row">
-        <div id="navbar"></div>
+        <div class="col-md-3" id="about">
+          <div class="about">
+          <h2>Overview</h2>
+          <p>
+              The purpose of this research is to better understand cyberaggression and cyberbullying in online social networks. Please help us by answering the questions for each image and its associated posts on Instagram. Use the definitions below to answer the questions about the different types of content that is posted.
+          </p>
+          <p>
+              Cyberaggression is broadly defined as using digital media to intentionally harm another person. Examples include negative content and words such as profanity, slang and abbreviations that would be used in negative posts such as hate, fight, wtf.
+          </p>
+          <p>
+              Cyberbullying is one form of cyberaggression that is more restrictively defined as intentional aggression that is repeatedly carried out in an electronic context against a person who cannot easily defend him or herself. Thus, cyberbullying consists of three main features: (1) an act of aggression online; (2) an imbalance of power between the individuals involved; and (3) it is repeated over time. An imbalance of power can include posts against an individual who cannot easily defend him or herself and or can include several individuals negatively targeting one individual.
+          </p>
+          <p>
+              <i>Definition of a victim</i>: The individual that is the target of aggression/insult/harassment. Definition of a perpetrator: The individual who posts aggressive/insulting/harassing/ unwanted questions/comments.
+          </p>
+          <p>
+              <i>Definition of defenders</i>: Individuals with posts that dislike the cyberbullying and defend the victim from the perpetrators of aggression/insults/harassment. The goal of the defender is to help the victim who is being cyberbullied, even with usage of offensive words by attacking the perpetrators.
+          </p>
+          <p>
+              <i>Definition of a follower</i>: Individuals that take an active part in cyberaggression or cyberbullying but do not start the cyberaggression or cyberbullying.
+          </p>
+
+          <h3>Process</h3>
+          <ol type="I">
+              <li>
+                  Read each post
+              </li>
+              <li>
+                  Answer the questions about the image and its posts, using the best of your ability
+              </li>
+          </ol>
       </div>
-      <div class="row">
-        <div class="col-md-3" id="about"><p></p></div>
-        <div class="col-md-9" id="content"></div>
+        </div>
+        <div class="col-md-9" id="content" style="padding-left: 40px; padding-top: 40px"></div>
     </div>
     <script type="text/jsx;harmony=true" src="scripts/results.js"></script>
-    <script type="text/jsx;harmony=true" src="scripts/nav.js"></script>
-    <script type="text/jsx;harmony=true" src="scripts/about.js"></script>
   </body>
 </html>

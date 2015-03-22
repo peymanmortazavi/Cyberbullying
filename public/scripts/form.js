@@ -2,12 +2,18 @@ var converter = new Showdown.converter();
 
 var Comment = React.createClass({
     render: function() {
+       var comment = this.props.data;
         return (
-            <div className="comment">
-                <h2 className="commentAuthor">
-                    {this.props.id}
-                </h2>
-                <span> <p>Likes: {this.props.children[1]}</p></span>
+            <div className="subComment container-fluid">
+           <div className="col-md-8">
+               <h5><b>{comment.user_id}</b></h5>
+               <p>
+                  <h5>{comment.comment}</h5>
+               </p>
+           </div>
+           <div className="col-md-4" style={{"text-align": "right"}}>
+           {comment.creation_time.replace("created_at:","")}
+           </div>
             </div>
         );
     }
@@ -18,28 +24,52 @@ var CommentList = React.createClass({
             var url = document.URL;
             var id = (url).split('=')[1];
             var commentNodes = this.props.data.map(function (comment) {
-            if (comment.id == id){
-                var comments = comment.comments.map(function (myComment) {
-                  return (
-                    <div class="row">
-                      <p>User: {myComment.user_id}</p>
-                      <p>{myComment.comment}</p>
-                      <p>Creation_time: {myComment.creation_time}</p>
-                      <hr/>
-                    </div>
-                  )
-                })
-                return (
-                  <div className="row">
-                    <Comment id={comment.profile_owner_id} className="col-md-6">
-                        Likes: {comment.likes}
-                    </Comment>
-                    <a>
-                      <img src= {comment.image_url} className="col-md-2"/>
-                    </a>
-                      {comments}
-                  </div>
-                );
+            if (comment.id == id) {
+               //return <p>nope</p>
+//                var comments = comment.comments.map(function (myComment) {
+//                  return (
+//                    <div class="row">
+//                      <p>User: {myComment.user_id}</p>
+//                      <p>{myComment.comment}</p>
+//                      <p>Creation_time: {myComment.creation_time}</p>
+//                      <hr/>
+//                    </div>
+//                  )
+//                })
+//                return (
+//                  <div className="row">
+//                    <Comment id={comment.profile_owner_id} className="col-md-6">
+//                        Likes: {comment.likes}
+//                    </Comment>
+//                    <a>
+//                      <img src= {comment.image_url} className="col-md-2"/>
+//                    </a>
+//                      {comments}
+//                  </div>
+//                );
+               
+                  var comments = comment.comments.map(function(userComment){
+                     
+                     return <Comment data={userComment} />
+                     
+                  });
+               
+                  return (<div>
+                     <div className="container-fluid comment header">
+                           <div className="col-md-8">
+                              <h3>{comment.profile_owner_id }</h3>
+                              <h5>{comment.owner_caption}</h5>
+                       <p>
+                              {comment.likes} 
+                              <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/2000px-Heart_coraz%C3%B3n.svg.png" style={{"width":"16px", "margin":"5px"}}/>
+                       </p>
+                           </div>
+                           <div className="col-md-4" style={{"text-align":"right"}}>
+                              <img src={comment.image_url} className="picture" />
+                           </div>
+                        </div>
+                          {comments}
+                          </div>);
             }
             else {
               return (<div/>)
